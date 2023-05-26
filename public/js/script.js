@@ -55,7 +55,7 @@ function buscarUsuario(){
 function usuarioOff(id){
     console.log(window.location.href)
     var pagAtual = window.location.href
-    if(id == localStorage.getItem("idArmazenado") && pagAtual != 'http://localhost:3000/configPerfil.html' && pagAtual != 'https://chat21-jessicamoreiraroso.b4a.run/configPerfil.html' && pagAtual != 'http://localhost:3000/chat.html' && pagAtual != 'https://chat21-jessicamoreiraroso.b4a.run/chat.html'){
+   if(id == localStorage.getItem("idArmazenado") && pagAtual != 'http://localhost:3000/configPerfil.html' && pagAtual != 'https://chat3-jessicamoreiraroso.b4a.run/configPerfil.html' && pagAtual != 'http://localhost:3000/chat.html' && pagAtual != 'https://chat3-jessicamoreiraroso.b4a.run/chat.html'){
         localStorage.setItem("idArmazenado", "ninguem");
     }
 }

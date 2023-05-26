@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/imagens/logo.png">
+    <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+    
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+
+    <!-- <link rel="stylesheet" href="http://192.168.0.108:3000/css/style.css"> -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <title>Chat fake</title>
+</head>
+<body onload="carregarUsuarioChat(), usuarioEntrou()">
+    <main class="mainChat">
+        <div class="conteudo">
+            <div class="esquerda">
+                <div class="headerChat">
+                    <div class="topo">
+                        <div class="imagemENome">
+                            <div id="areaImgPerfil"></div>
+                            <h3 id="olaUsuario">Olá <input class="inputInvisivel" type="text" id="nome" readonly></h3>
+                        </div>
+                        <input class="none" type="text" id="idUserHeader" readonly>
+                        <div id="opcoesCaixa">
+                            <input type="image" src="imagens/opcoes.png" onclick="opcoes()" class="dropbtn"></input>
+                            <div id="myDropdown" class="dropdown-content">
+                                <a href="index.html">Home</a>
+                                <a href="configPerfil.html">Perfil</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="areaConectados"></div>
+            </div>
+            <div class="areaChat">
+                <div class="headerChat">
+                    <div class="topo">
+                        <h3>Chat</h3>
+                        <div class="btnsBackup">
+                            <button onclick="backupConversa()">Fazer backup</button>
+                            <button onclick="deletarBackupConversa()">Deletar backup</button>
+                            <button onclick="deletarMensagensFrontUser()">Deletar mensagens</button>
+                        </div>
+
+                    </div>
+                </div>
+                <div id="areaMensagem">
+                    <div id="mensagens"></div>
+                </div>
+                
+                <div class="areaEscrever">
+                    <form action="">
+                        <div id="areaInputImg">
+                            <label class="labelAnexaFoto" for="inputImg">
+                                <img src="imagens/btnFoto.png" alt="">
+                            </label>
+                            <input type="file" id="inputImg" accept=".png,.jpeg,.jpg,.webm,." size="10000000">
+                        </div>
+                        
+                        <textarea type="text" id="mensagem" placeholder="Mensagem" cols="30" rows="2" style="resize: none;"></textarea>
+                        <button>
+                            <img src="imagens/btnSeta.png" alt="">
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- <script src="http://192.168.0.108:3000/js/script.js"></script> -->
+    <script src="js/script.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script> 
+
+    <script type="text/javascript" src="https://l2.io/ip.js?var=userip"></script>
+
+    <script>
+        //Criar uma instancia
+        const socket = io();
+        const nomeInput = document.getElementById('nome');
+        const mensagemInput = document.getElementById('mensagem');
+        const mensagens = document.getElementById('mensagens');
+        const idInput = document.getElementById('idUserHeader');
+
+        function usuarioEntrou(){
+            //Criar evento chamado chat message - EMIT
+            //Um metodo chamado trim que remove os espaços em branco do inicio ao fim
+            var idUser = localStorage.getItem("idArmazenado")
+            idUser.trim() && socket.emit('entrou', {idUser});
+        }
+
+        document.querySelector('form').addEventListener('submit', event =>{
+            event.preventDefault();
+
+            //Obtem o valor dos inputs
+            const nome = nomeInput.value;
+            const mensagem = mensagemInput.value;
+            const id = idInput.value
+
+            //Criar evento chamado chat message - EMIT
+            //Um metodo chamado trim que remove os espaços em branco do inicio ao fim
+            id.trim() && nome.trim() && mensagem.trim() && socket.emit('chat message', {nome, mensagem, id});
+            //Limpar input da mensagem após o envio
+            mensagemInput.value = "";
+            //Desabilitar o campo do nome para o usuario não ficar trocando de nome
+            nomeInput.disable = true; 
+        });
+
+        //Adiciona o evento para mensagem recebida do servidor
+        socket.on('chat message', dados => {    
+            const exibirMensagem = document.createElement('div');
+            exibirMensagem.classList.add("filho");
+            var aMensagem = dados.mensagem
+            if(aMensagem.includes('<') && aMensagem.includes('>')){
+                aMensagem = `<b>O plano de ${dados.nome} falhou terrivelmente</b>`
+            }
+            exibirMensagem.innerHTML = `<div class="balao"><p class="nomeMensagem">${dados.nome}</p><p class="mensagem">${aMensagem}</p></div>`
+            //scroll(0, scroll.y+100);
+            console.log(document.getElementById('areaMensagem').scrollHeight)
+            console.log(mensagens.clientHeight)
+
+            var areaMensagem = document.getElementById('areaMensagem')
+            areaMensagem.scrollTo(0, areaMensagem.scrollHeight);
+
+            mensagens.appendChild(exibirMensagem);
+            mudarClasse(mensagens, dados.id, $('#idUserHeader').val())
+        });
+
+        socket.on('entrou', idInfoUser => {
+            //avisar na area das mensagem um aviso
+            const aviso = document.createElement('div')
+            aviso.classList.add("aviso");
+
+            //criar o card em que aparece o usuario
+            const card = document.createElement('div')
+            card.classList.add("cardConexao");
+
+            var hora = new Date().getHours();
+            var minutos = new Date().getMinutes();
+            if(minutos<10){
+                minutos = "0"+minutos
+            }
+
+            //get nas informacoes do usuario
+            fetch(`https://cadastrochat-jessicamoreiraroso.b4a.run/usuarios/${idInfoUser.idUser}`,{
+                method: 'GET'
+            })
+            .then(response => response.json())
+            .then(dados => {
+                var espacoImg = document.createElement('div');
+                espacoImg.classList.add('imagemDoCard');
+                espacoImg.style.backgroundImage = "url("+$(dados.foto).attr('src')+")";
+
+                card.appendChild(espacoImg)
+                card.innerHTML += `<div class="cardNomeEstatus">
+                                    <h3>${dados.nome}</h3>
+                                    <p>${dados.status}</p>
+                                  </div>
+                                <input type="number" value="${idInfoUser.idUser}" class="none" id="${idInfoUser.idUser}">`;
+                
+                aviso.innerHTML = `<div>
+                                    <p>${dados.nome} entrou no grupo</p>
+                                    <p>${hora}:${minutos}</p>
+                                    </div>`;
+            })
+            document.getElementById('areaConectados').appendChild(card)
+            mensagens.appendChild(aviso)
+            console.log(idInfoUser.idUser)
+            mudarConexaoOn(idInfoUser.idUser);
+        })
+        
+        function mudarConexaoOn(id){
+            fetch(`https://cadastrochat-jessicamoreiraroso.b4a.run/usuarios/${id}`,{
+                method: 'GET'
+            })
+            .then(response => response.json())
+            .then(dados => {
+                fetch(`https://cadastrochat-jessicamoreiraroso.b4a.run/usuarios/${id}`,{
+                    method: 'PUT',
+                    headers:{
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        nome: dados.nome,
+                        email: dados.email, 
+                        senha: dados.senha,
+                        status: dados.status,
+                        telefone: dados.telefone,
+                        foto: dados.foto,
+                        conexao: true,
+                        backup: dados.backup
+                    })
+                })
+                .then(response => response.json())
+            })
+        }
+
+        //window.onbeforeunload
+        //window.onunload
+
+        //avisar os outros usuarios quem saiu do chat e apaga o card
+        function remove(){
+            var idUser = localStorage.getItem("idArmazenado")
+            idUser.trim() && socket.emit('saiu', {idUser});
+        }
+
+        socket.on('remove', idSaiu => {
+            const aviso = document.createElement('div')
+            aviso.classList.add("aviso");
+            var hora = new Date().getHours();
+            var minutos = new Date().getMinutes();
+
+            fetch(`https://cadastrochat-jessicamoreiraroso.b4a.run/usuarios/${idSaiu}`,{
+                method: 'GET'
+            })
+            .then(response => response.json())
+            .then(dados => {
+                aviso.innerHTML = `<div>
+                    <p>${dados.nome} saiu no grupo</p>
+                    <p>${hora}:${minutos}</p>
+                    </div>`;
+
+                //PUT para mudar status da conexao do usuario
+                fetch(`https://cadastrochat-jessicamoreiraroso.b4a.run/usuarios/${idSaiu}`,{
+                  method: 'PUT',
+                  headers:{
+                    'Content-Type': 'application/json'
+                },
+                  body: JSON.stringify({
+                    nome: dados.nome,
+                    email: dados.email, 
+                    senha: dados.senha,
+                    status: dados.status,
+                    telefone: dados.telefone,
+                    conexao: false,
+                    foto: dados.foto,
+                    backup: dados.backup
+                  })
+                })
+                .then(response => response.json())
+                usuarioOff(idSaiu);
+            })
+            mensagens.appendChild(aviso)
+            removeCard(idSaiu)
+        })
+
+        socket.on('removeUltimo', idSaiu => {
+            fetch(`https://cadastrochat-jessicamoreiraroso.b4a.run/usuarios/${idSaiu}`,{
+                method: 'GET'
+            })
+            .then(response => response.json())
+            .then(dados => {
+                //PUT para mudar status da conexao do usuario
+                fetch(`https://cadastrochat-jessicamoreiraroso.b4a.run/usuarios/${idSaiu}`,{
+                  method: 'PUT',
+                  headers:{
+                    'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify({
+                    nome: dados.nome,
+                    email: dados.email, 
+                    senha: dados.senha,
+                    status: dados.status,
+                    telefone: dados.telefone,
+                    conexao: false,
+                    foto: dados.foto,
+                    backup: dados.backup
+                  })
+                })
+                .then(response => response.json())
+                usuarioOff(idSaiu);
+            })
+            removeCard(idSaiu)
+        })
+
+
+
+        document.getElementById("inputImg").addEventListener("change", function () {
+            const nome = nomeInput.value;
+            const id = idInput.value
+            const file = this.files[0];
+            const reader = new FileReader();
+            reader.addEventListener("load", function () {
+                reduceImageQuality(reader.result, 0.5).then(function (result) {
+                    //document.getElementById("imagem").style.backgroundImage = `url(${result})`;
+                    id.trim() && nome.trim() && socket.emit('chat imagem', {nome, result, id});
+                });
+            });
+            reader.readAsDataURL(file);
+        });
+
+        socket.on('chat imagem', dados => {    
+            //console.log("aaa"+dados.result);
+            const exibirMensagem = document.createElement('div');
+            exibirMensagem.classList.add("filho");
+            exibirMensagem.innerHTML = `<div class="balao"><p class="nomeMensagem">${dados.nome}</p><div align="center"><img src="${dados.result}" width="280px"></div></div>`
+            mensagens.appendChild(exibirMensagem);
+            mudarClasse(mensagens, dados.id, $('#idUserHeader').val())
+        });
+
+    </script>
+</body>
+</html>

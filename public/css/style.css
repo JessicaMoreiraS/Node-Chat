@@ -1,0 +1,769 @@
+/*GERAIS*/
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Varela Round', sans-serif;
+}
+body{
+    background-color: #ece5dd;
+}
+.none{
+    display: none;
+}
+.inputInvisivel{
+    background-color: transparent;
+    border: none;
+}
+
+
+
+/*CONFIGPERFIL*/
+.inputInvisivel:focus, .mainConfgPerfil form input:focus{
+    box-shadow: 0 0 0 0;
+    border: 0 none;
+    outline: 0;
+}
+.mainConfgPerfil form input:focus{
+    border-bottom: 2px solid #128c7e;
+}
+.invisivel{
+    display: none;
+}
+
+/*HOME*/
+.home{
+    background-color: #B026AD;
+}
+.home main{
+    background-image: url(../imagens/fundoPontosRoxos.jpg);
+    background-size: contain;
+    background-repeat: repeat-x;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.home main .container{
+    display: flex;
+    flex-direction: row; 
+    background-color: #fff;
+    border: 5px solid purple;
+    border-radius: 10px;
+    width: 80%;
+    height: 80%;
+    animation: mymove 5s infinite;
+}
+@keyframes mymove {
+    50% {box-shadow: 10px 20px 30px blue;}
+}
+@keyframes slideinToRight {
+    from {
+      margin-left: 100%;
+      width: 300%;
+    }
+    to {
+      margin-left: 0%;
+      width: 80%;
+    }
+}
+.home main .principalEsquerda{
+    /*background-color: rgb(1, 16, 39);*/
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    text-align: center;
+}
+.home main .principalEsquerda .logo{
+    width: 50%;
+}
+.home main .principalEsquerda .animation {
+    font: bold 200% Consolas, Monaco, monospace;
+    border-right: .1em solid black;
+    width: 21.20ch;
+    margin: 2em 2em;
+    white-space: nowrap;
+    overflow: hidden;
+    -webkit-animation: typing 5s steps(21, end),
+    blink-caret .5s step-end infinite alternate;
+}
+@keyframes typing {
+    from {
+      width: 0;
+    }
+}
+@keyframes blink-caret {
+    50% {
+      border-color: transparent;
+    }
+}
+.home main .principalDireita{
+    /*background-color: #ece5dd;*/
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.home main .principalDireita .btns{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    height: 50%;
+}
+.home main .principalDireita .btns button {
+    border: 1.5px solid black;
+    border-radius: 10px;
+    padding: 2%;
+    font-size: 2em;
+    width: 150px;
+    margin: 15px;
+    color: #f5f0f0;
+    background-color: #101014;
+    box-shadow: 3px 3px 6px #101014;
+    transition: transform 0.3s ease-in-out;
+}
+.home main .principalDireita .btns button:hover{
+    background-color: #f5f0f0;
+    color: #101014;
+    transform: scale(1.2);
+}
+@media screen and (max-width: 1100px) {
+    .home main{
+        height: 100%;
+    }
+    .home main .container{
+        flex-direction: column;
+        margin: 3% 0;
+    }
+    .home main .principalEsquerda, .home main .principalDireita{
+        width: 100%;
+        height: 50%;
+    }
+    .home main .principalEsquerda .animation{
+        font-size: 1.5em;
+    }
+}
+
+/*LOGIN e CADASTRO*/
+.loginEcadastro main, .loginEcadastro{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+.loginEcadastro .card {
+    padding: 2rem 1.5rem;
+    text-align: center;
+    background: #2a2b38;
+    width: 30%;
+    min-width: 300px;
+    max-width: 600px;
+    animation: mymove 5s infinite;
+}
+   /*Inputs*/
+.loginEcadastro .field {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .8em;
+    background-color: #1f2029;
+    border-radius: 10px;
+    padding: 1em;
+}  
+.loginEcadastro .input-icon {
+    height: 1.2em;
+    width: 1.2em;
+    fill: #ffeba7;
+}   
+.loginEcadastro .card form input {
+    background: none;
+    border: none;
+    outline: none;
+    width: 100%;
+    color: #d3d3d3;
+    font-size: 1.2em;
+    padding: 1%;
+}    
+   /*Text*/
+.loginEcadastro .title {
+    margin-bottom: 1rem;
+    font-size: 1.5em;
+    font-weight: 500;
+    color: #f5f5f5;
+}   
+   /*Buttons*/
+.loginEcadastro .btn {
+    margin: 0 auto;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 1em;
+    text-transform: uppercase;
+    padding: 0.6em 1.2em;
+    background-color: #ffeba7;
+    color: #5e6681;
+    box-shadow: 0 8px 24px 0 rgb(255 235 167 / 20%);
+    transition: all .3s ease-in-out;
+}   
+.loginEcadastro .btn-link {
+    color: #f5f5f5;
+    display: block;
+    font-size: 1em;
+    transition: color .3s ease-out;
+}   
+   /*Hover & focus*/
+.loginEcadastro .field input:focus::placeholder {
+    opacity: 0;
+    transition: opacity .3s;
+} 
+.loginEcadastro .btn:hover {
+    background-color: #5e6681;
+    color: #ffeba7;
+    box-shadow: 0 8px 24px 0 rgb(16 39 112 / 20%);
+}   
+.loginEcadastro .btn-link:hover {
+    color: #ffeba7;
+}
+
+
+/*CONFIPERFIL*/
+.topoParaVoltar{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start; 
+    width: 100%;   
+}
+.topoParaVoltar a{
+    color: #000;
+    font-family: 'Varela Round', sans-serif;
+    text-decoration: none;
+    text-align: center;
+}
+.chatIco{
+    width: 70px;
+}
+.btnPequeno{
+    color: #F6F5F5;
+    font-weight: 100;
+    width: 125px;
+    height: 70px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.mainConfgPerfil{
+    /*background-color: #212121; /*#070D59;*/
+    background-image: url('../imagens/whatsBackGround.jpg');
+    background-size: contain;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.mainConfgPerfil form{
+    background-color: #F0F2F5;
+    width: 50%;
+    min-width: 350px;
+    border-radius: 10px;
+}
+.mainConfgPerfil form #areImgPerfil{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45%;
+}
+.mainConfgPerfil form #areImgPerfil img{
+    width: 90%;
+}
+.info1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5%;
+    width: 100%;
+    flex-wrap: wrap;
+}
+.nomeUpStatus{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 45%;
+}
+
+.mainConfgPerfil form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2%;
+    border: solid 2px #128c7e;
+}
+.nomeUpStatus textarea{
+    background-color: transparent;
+    text-align: center;
+    border-radius: 10px;
+    margin: 10%;
+    width: 60%;
+}
+.mainConfgPerfil form #areImgPerfil{
+    width: 200px;
+    height: 200px;
+    margin: 5%;
+    background-size: cover;
+    background-position: center;
+    border-radius: 100px;
+    border: solid 2px #128c7e;
+}
+/* .mainConfgPerfil form #areImgPerfil .configFotoPerfil{
+    /*height: 100%;
+} */
+
+.mainConfgPerfil form input{
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid #128c7e;
+    font-size: 1.2em;
+    color: rgb(88, 88, 88);
+    text-align: center;
+    margin: 2%;
+    width: 50%;
+    min-width: 200px;
+}
+#upImgPerfil{
+    font-size: 0.8em;
+    width: 90%;
+}
+
+/*btn para remover foto de perfil*/
+.mainConfgPerfil form .nomeUpStatus .btn {
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    border: none;
+    position: relative;
+    border-radius: 10px;
+    -webkit-box-shadow: 1px 1px 5px .2px #00000035;
+    box-shadow: 1px 1px 5px .2px #00000035;
+    -webkit-transition: .2s linear;
+    transition: .2s linear;
+    transition-delay: .2s;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: space-between;
+    margin-top: 2%;
+}
+.mainConfgPerfil form .nomeUpStatus .btn:hover {
+    width: 200px;
+    transition-delay: .2s;
+}  
+.mainConfgPerfil form .nomeUpStatus .btn:hover > .paragraph {
+    visibility: visible;
+    opacity: 1;
+    -webkit-transition-delay: .4s;
+    transition-delay: .4s;
+}
+.mainConfgPerfil form .nomeUpStatus .btn:hover > .icon-wrapper .icon {
+    transform: scale(1.1);
+}
+.mainConfgPerfil form .nomeUpStatus .bnt:hover > .icon-wrapper .icon path {
+    stroke: black;
+}  
+.mainConfgPerfil form .nomeUpStatus .paragraph {
+    color: black;
+    visibility: hidden;
+    opacity: 0;
+    font-size: 12px;
+    margin-right: 20px;
+    padding-left: 20px;
+    -webkit-transition: .2s linear;
+    transition: .2s linear;
+    font-weight: bold;
+    text-transform: uppercase;
+}  
+.mainConfgPerfil form .nomeUpStatus .icon-wrapper {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}  
+.mainConfgPerfil form .nomeUpStatus .icon {
+    transform: scale(.9);
+    transition: .2s linear;
+}
+.mainConfgPerfil form .nomeUpStatus .icon path {
+    stroke: #000;
+    stroke-width: 2px;
+    -webkit-transition: .2s linear;
+    transition: .2s linear;
+}
+
+/*btn para atualizar as informacoes do perfil*/
+.mainConfgPerfil form .box {
+    width: 45px;
+    height: 45px;
+    background: #5cda5c;
+    border-radius: 25px;
+    display: flex;
+    justify-items: center;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s;
+    cursor: pointer;
+    position: relative;
+    border: 2px solid #128c7e;
+}  
+.mainConfgPerfil form .arrow {
+    border: solid #128c7e;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+}  
+.mainConfgPerfil form .right {
+    transform: rotate(-135deg);
+}  
+.mainConfgPerfil form .box:hover {
+    width: 160px;
+    background: linear-gradient(to right, #26d526, rgb(60, 255, 0));
+}  
+.mainConfgPerfil form .box:hover .arrow {
+    display: none;
+}  
+.mainConfgPerfil form .box .text {
+    display: none;
+}  
+.mainConfgPerfil form .box:hover .text {
+    display: flex;
+    font-size: 16px;
+    font-weight: 550;
+    color: #128c7e;
+    letter-spacing: 0.6px;
+    animation: anima 0.6s ease;
+}  
+@keyframes anima {
+    0% {
+        opacity: 0;
+    }
+  
+    100% {
+      opacity: 1;
+    }
+}  
+.box:active {
+    background: linear-gradient(to right, rgb(38, 213, 38, 0.8), rgba(60, 255, 0));
+}
+  
+
+
+
+/*
+.color1 {color: #113459;}
+.color2 {color: #444579;}
+.color3 {color: #865da1;}
+.color4 {color: #e17ccb;}
+.color5 {color: #ffa5f0;}
+*/
+
+
+
+
+/*CHAT*/
+
+#olaUsuario{
+    width: 80px;
+}
+.mainChat{
+    background-color: #128c7e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.mainChat .conteudo{
+    background-color: #dcf8c6;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    height: 95vh;
+    width: 95%;
+}
+.mainChat .esquerda{
+    background-color: #dcf8c6;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 83vh;
+    width: 25%;
+}
+.headerChat{
+    width: 100%;
+    height: 10vh;
+    background-color: #F0F2F5/*#075e54*/;
+    color: #101010;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: 'Varela Round', sans-serif;
+}
+.btnsBackup{
+    display: flex;
+    justify-content: right;
+    flex-direction: column;
+    width: 190px;
+}
+.btnsBackup button{
+    background-color: #128c7e;
+    color: #fff;
+    border-radius: 10px;
+    border: 2px solid #5e6681;
+    margin: 2% 5%;
+    font-size: 0.95em;
+    transition: 0.7s;
+}
+.btnsBackup button:hover{
+    background-color: #fff;
+    color: #128c7e;
+    border: 2px solid #128c7e;
+}
+.headerChat .topo{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    min-height: 88px;
+}
+.headerChat .topo .imagemENome{
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    align-items: center;
+}
+.headerChat h3{
+    margin: 0.5%;
+}
+.headerChat input{
+    color: #000000;
+    font-size: 1em;
+    font-family: 'Varela Round', sans-serif;
+}
+.imagemENome{
+    margin: 10px 0px 0px 10px;
+}
+.headerChat .topo #areaImgPerfil{
+    width: 75px;
+    height: 75px;
+    border-radius: 50px;
+    margin-right: 2%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}/*
+.headerChat .topo #areaImgPerfil img{
+    width: 100%;
+    border-radius: 100%;
+}*/
+
+
+/* Dropdown */
+.dropbtn {
+    border: none;
+    cursor: pointer;
+    height: 100%;
+    width: 3vh;
+    max-height: 7vh;
+    margin-right: 15px;
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 10px;
+    margin-left: -150px;
+}
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    border-radius: 10px;
+}
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+.show {display:block;}
+
+
+#areaConectados{
+    width: 100%;
+    min-height: 85vh;
+    max-height: 85vh;
+    background-color: #ece5dd;
+    border-right: solid 1.5px #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: calc(97vh - 116px);
+    overflow: auto;
+    direction: rtl;
+}
+.imagemDoCard{
+    width: 70px;
+    height: 70px;
+    border-radius: 50px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+#areaConectados .cardConexao{
+    width: 97%;
+    display: flex;
+    flex-direction: row;
+    background-color: #fff;
+    margin: 1%;
+    border: 2px solid #F0F2F5;
+    direction: ltr;
+}
+
+#areaConectados .cardConexao .cardNomeEstatus{
+    padding: 2%;
+    max-width: 60%;
+}
+
+.esquerda{
+    min-height: 95vh;
+    background-color: #0044ff;
+    border-right: 2px solid #5e6681;
+}
+.areaChat{
+    width: 75%;
+    height: 95vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.labelAnexaFoto{
+    width: 50px;
+}
+.labelAnexaFoto img{
+    width: 50px;
+    cursor: pointer;
+}
+#inputImg, #inputImgPerfil{
+    display: none;
+}
+
+#areaMensagem{
+    background-image: url('../imagens/fundoWhats.jpg');
+    background-size: cover;
+    width: 100%;
+    max-width: 100%;
+    height: calc(100vh - 116px);
+    overflow: auto;
+    height: 78vh;
+}
+.balao{
+    background-color: #fff;
+    min-width: 100px;
+    max-width: 300px;
+    width: 300px;
+    padding: 1%;
+    border-radius: 5px;
+    margin: 2%;
+    word-break: break-word;
+}
+.aviso{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.aviso div{
+    background-color: rgb(213, 224, 196);
+    min-width: 100px;
+    max-width: 200px;
+    padding: 1%;
+    border-radius: 5px;
+    margin: 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.nomeMensagem, .mensagem{
+    text-align: left;
+    padding: 2%;
+}
+
+.areaMinhaMensagem{
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+.areaMinhaMensagem div{
+    min-width: 100px;
+    max-width: 300px;
+    width: 300px;
+    background-color: #dcf8c6;
+}
+
+.areaEscrever{
+    background-color: #F0F2F5;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.areaEscrever form{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.areaEscrever #mensagem{
+    width: 70%;
+    border-radius: 10px;
+    font-size: 1.2em;
+    padding: 5px;
+    margin: 2%;
+}
+.areaEscrever button img{
+    width: 60px;
+    cursor: pointer;
+}
+
+.areaEscrever button{
+    border: none;
+    border-radius: 90px;
+    width: 60px;
+    height: 60px;
+}
+

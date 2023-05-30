@@ -1,5 +1,13 @@
 # Chat-em-servidor-local
-criar chat que funciona em toda a rede local, utilização de node (projeto em andamento)
+Chat utilizando Node.js, com socket.io, express e http
+O chat possui cadastramento e login, é possibvel acessar o chat em grupo e alterar informações do seu perfil como status e foto
+
+Páginas disponíveis:
+-Home
+-Cadastro
+-Login
+-Chat
+-Configurações do perfil
 <!--
 criar conta:
 https://cadastrochat-jessicamoreiraroso.b4a.run/-->

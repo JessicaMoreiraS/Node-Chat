@@ -85,19 +85,19 @@ http.listen(portaChat, () => {
 
 
 const jsonServer = require('json-server');
-const server = jsonServer.create();
-const router = jsonServer.router('db.json');
+const serverJson = jsonServer.create();
+const routerJson = jsonServer.router('db.json');
 const middlewares = jsonServer.defaults();
 server.use(middlewares);
 const portaJson = 3001;
 server.use(router);
-const express = require('express');
-const app = express();
-app.use(express.static('public'));
-app.get('/', function(req, res) {
+const expressJson = require('express');
+const appJson = express();
+appJson.use(expressJson.static('public'));
+appJson.get('/', function(req, res) {
     res.send(__dirname = '/public/index.html');
 })
-server.listen(portaJson, () => {
+serverJson.listen(portaJson, () => {
     console.log(`JSON SERVER está rodando em http://localhost:${portaJson}`);
 })
 

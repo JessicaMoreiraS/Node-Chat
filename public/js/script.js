@@ -2,7 +2,7 @@
 function cadastrarUsuario(){
     event.preventDefault();
 
-    fetch("https://apresentacao-jessicamoreiraroso.b4a.run/db.json", {
+    fetch("https://cadastrochat-jessicamoreiraroso.b4a.run/usuarios", {
         method:'POST',
         headers:{
             'Content-Type': 'application/json'
@@ -18,7 +18,7 @@ function cadastrarUsuario(){
             backup:""
         })
     })
-    .then(response => response.json().usuarios)
+    .then(response => response.json())
 
     //adicionar apagar campos
     document.getElementById('nome').value= ""

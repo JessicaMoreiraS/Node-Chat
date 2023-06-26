@@ -65,15 +65,11 @@ io.on('connection', (socket) => {
                 }else{
                     ultimoQueSaiu = 0
                 }
-
                 conectados.splice(i,1);
             }
         }
-        //console.log(conectados);
         console.log("desconectado "+socket.id);
     });
-
-    //tentativa de disconectar o ultimo a sair
 });
 
 
@@ -83,11 +79,26 @@ const portaChat = 3000;
 http.listen(portaChat, () => {
   console.log(`Servidor CHAT rodando na porta ${portaChat} - Link http://localhost:${portaChat}`);
 });
-/*
-const portaJson = 3001;
-  server.listen(portaJson, () => {
-  console.log(`JsonServer esta rodando em http://localhost:${portaJson}`);
-})*/
 
+
+
+
+
+const jsonServer = require('json-server');
+const server = jsonServer.create();
+const router = jsonServer.router('db.json');
+const middlewares = jsonServer.defaults();
+server.use(middlewares);
+const portaJson = 3001;
+server.use(router);
+const express = require('express');
+const app = express();
+app.use(express.static('public'));
+app.get('/', function(req, res) {
+    res.send(__dirname = '/public/index.html');
+})
+server.listen(portaJson, () => {
+    console.log(`JSON SERVER está rodando em http://localhost:${portaJson}`);
+})
 
 
